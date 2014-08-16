@@ -1,5 +1,7 @@
 ```{r loadlib,echo=FALSE,results='hide'}
+
 library(lattice)
+
 ```
 
 
@@ -7,7 +9,7 @@ library(lattice)
 
 
 ## Introduction
-This file is the R Mark down file for Reproducible Research peer assessment 1. Probelm details regarding this assessment is available in [Read Me file]("https://github.com/vinaykk/RepData_PeerAssessment1/blob/master/README.md") 
+This file is the R Mark down file for Reproducible Research peer assessment 1. Probelm details regarding this assessment is available in [Read Me]("https://github.com/vinaykk/RepData_PeerAssessment1/blob/master/README.md") 
 
 Following are the sections related to problems asked in this assessment. 
 
@@ -15,27 +17,35 @@ Following are the sections related to problems asked in this assessment.
 
 Load the activity data
 ```{r load activity data}
+
 DFActivity <- read.csv("activity.csv",colClasses=c("numeric","Date","numeric"))
+
 ```
 Process/transform data
 ```{r transform data for mean calculation}
+
 DFTotalStepsPerDay <- aggregate(steps ~ date, data = DFActivity , FUN="sum")
 DFAvgStepsPerInt <- aggregate(steps ~ interval, data = DFActivity , FUN="mean")
+
 ```
 
 
 ## What is mean total number of steps taken per day?
 
 Generate histogram of the total number of steps taken each day
-```{r plot histogram for mean total number of steps taken per day}
+```{r fig1 plot histogram for mean total number of steps taken per day}
+
 hist(DFTotalStepsPerDay$steps,col="Red",freq=TRUE,main="Total number of steps taken each day",xlab="Total Steps")
+
 ```
 
 Calculate and report the mean and median total number of steps taken per day
 ```{r calc mean & median}
+
 stepsMean <- mean(DFTotalStepsPerDay$steps)
 
 stepsMedian <- median(DFTotalStepsPerDay$steps)
+
 ```
 
 The Mean total number of steps taken per day is `r format(stepsMean)`    
@@ -45,13 +55,17 @@ The Median total number of steps taken per day is `r format(stepsMedian)`
 
 Make a time series plot (i.e. type = "l") of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all days (y-axis)
 
-```{r plot time series for average daily activity pattern}
+```{r fig2 plot time series for average daily activity pattern}
+
 plot(DFAvgStepsPerInt$interval,DFAvgStepsPerInt$steps,type="l" )
+
 ````
 
 Calculate 5- Minute interval that has max avergate across all day. 
 ```{r calc 5-Minute interval}
+
 max5MinInt <- DFAvgStepsPerInt[ (DFAvgStepsPerInt$steps  == max(DFAvgStepsPerInt$steps)),]$interval
+
 ```
 
 `r format(max5MinInt-5)` - `r format(max5MinInt)` is the 5-minute interval, on average across all the days in the dataset, containg the maximum number of steps.
@@ -62,7 +76,9 @@ Note that there are a number of days/intervals where there are missing values (c
 Calculate and report the total number of missing values in the dataset (i.e. the total number of rows with NAs)
 
 ```{r missing values}
+
 ncnt <- summary(is.na(DFActivity$steps))[3][1]
+
 ```
 Total number of missing values in the dataset is `r ncnt`
 
@@ -72,22 +88,28 @@ Following is the strategy used to replace missing values.
 3. Replace NA's with calculated mean
 
 ```{r Apply strategy to replace missing values}
+
 DFActivityImput <- DFActivity
 DFActivityImput$step[(is.na(DFActivityImput$steps))] <- round(ave(DFActivityImput$steps, DFActivityImput$interval, FUN = function(x) mean(x, na.rm=T) )[(is.na(DFActivityImput$steps))])
+
 ```
 
 Make a histogram of the total number of steps taken each day
-```{r plot histogram mean total number of steps taken per day using imputed data}
+```{r fig3 plot histogram mean total number of steps taken per day using imputed data}
+
 DFSumStepsPerDayImput <- aggregate(steps ~ date, data = DFActivityImput , FUN="sum")
 
 hist(DFSumStepsPerDayImput$steps,col="Red",freq=TRUE,main="Total number of steps taken each day",xlab="Total Steps")
+
 ```
 
 Calculate and report the mean and median total number of steps taken per day
 ```{r calc mean & median using imputed data}
+
 stepsMean <- mean(DFSumStepsPerDayImput$steps)
 
 stepsMedian <- median(DFSumStepsPerDayImput$steps)
+
 ```
 
 The Mean total number of steps taken per day is `r format(stepsMean)`
@@ -102,17 +124,17 @@ Estimates of the total daily number of steps has no impact after applying stateg
 
 Create a new factor variable in the dataset with two levels - "weekday" and "weekend" indicating whether a given date is a weekday or weekend day.
 
-```{r create weekday/weekend Factor variable}
+```{r create Day Type Factor variable with levles weekday and weekend}
 
 DFActivity$DayType <- as.factor( ifelse( (weekdays(DFActivity$date) == "Sunday" | weekdays(DFActivity$date) == "Saturday"),"weekday","weekend" ))
 
 DFAvgStepsPerInt <- aggregate(steps ~ interval + DayType, data = DFActivity , FUN="mean")
 ```
 
-```{r plot pannels for differences in activity patterns between weekdays and weekends}
+```{r fig4 plot pannels for differences in activity patterns between weekdays and weekends}
+
 xyplot(steps ~ interval | DayType, data = DFAvgStepsPerInt,type="l", layout = c(1,2), ylab="Number of Steps", xlab="Interval" )
 
+
 ```
-
-
 
