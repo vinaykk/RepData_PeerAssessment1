@@ -35,7 +35,7 @@ Generate histogram of the total number of steps taken each day
 hist(DFTotalStepsPerDay$steps,col="Red",freq=TRUE,main="Total number of steps taken each day",xlab="Total Steps")
 ```
 
-![plot of chunk plot histogram](figure/plot histogram.png) 
+![plot of chunk plot histogram for mean total number of steps taken per day](figure/plot histogram for mean total number of steps taken per day.png) 
 
 Calculate and report the mean and median total number of steps taken per day
 
@@ -57,7 +57,7 @@ Make a time series plot (i.e. type = "l") of the 5-minute interval (x-axis) and 
 plot(DFAvgStepsPerInt$interval,DFAvgStepsPerInt$steps,type="l" )
 ```
 
-![plot of chunk plot time series of 5-minute interVal](figure/plot time series of 5-minute interVal.png) 
+![plot of chunk plot time series for average daily activity pattern](figure/plot time series for average daily activity pattern.png) 
 
 Calculate 5- Minute interval that has max avergate across all day. 
 
@@ -97,7 +97,7 @@ DFSumStepsPerDayImput <- aggregate(steps ~ date, data = DFActivityImput , FUN="s
 hist(DFSumStepsPerDayImput$steps,col="Red",freq=TRUE,main="Total number of steps taken each day",xlab="Total Steps")
 ```
 
-![plot of chunk plot histogram using imputed data](figure/plot histogram using imputed data.png) 
+![plot of chunk plot histogram mean total number of steps taken per day using imputed data](figure/plot histogram mean total number of steps taken per day using imputed data.png) 
 
 Calculate and report the mean and median total number of steps taken per day
 
@@ -131,7 +131,7 @@ DFAvgStepsPerInt <- aggregate(steps ~ interval + DayType, data = DFActivity , FU
 xyplot(steps ~ interval | DayType, data = DFAvgStepsPerInt,type="l", layout = c(1,2), ylab="Number of Steps", xlab="Interval" )
 ```
 
-![plot of chunk plot pannels](figure/plot pannels.png) 
+![plot of chunk plot pannels for differences in activity patterns between weekdays and weekends](figure/plot pannels for differences in activity patterns between weekdays and weekends.png) 
 
 
 
