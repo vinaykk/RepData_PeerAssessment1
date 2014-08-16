@@ -57,7 +57,7 @@ Make a time series plot (i.e. type = "l") of the 5-minute interval (x-axis) and 
 
 ```{r fig2 plot time series for average daily activity pattern}
 
-plot(DFAvgStepsPerInt$interval,DFAvgStepsPerInt$steps,type="l" )
+plot(DFAvgStepsPerInt$interval,DFAvgStepsPerInt$steps,type="l",xlab="interval",ylab="Avg Steps" ,main="Average Steps Taken per interval")
 
 ````
 
