@@ -79,6 +79,7 @@ ncnt <- summary(is.na(DFActivity$steps))[3][1]
 Total number of missing values in the dataset is 2304
 
 Following is the strategy used to replace missing values. 
+
 1. Make copy of data set
 2. Calculate mean steps for each  5-minute interval 
 3. Replace NA's with calculated mean
@@ -107,7 +108,7 @@ stepsMean <- mean(DFSumStepsPerDayImput$steps)
 stepsMedian <- median(DFSumStepsPerDayImput$steps)
 ```
 
-The Mean total number of steps taken per day is 10766
+The Mean total number of steps taken per day is 10766  
 The Median total number of steps taken per day is 10765
 
 Mean and Median total number of steps taken does not differ after applying strategy to replace missing steps count with mean steps of 5-minute interval.
@@ -125,6 +126,8 @@ DFActivity$DayType <- as.factor( ifelse( (weekdays(DFActivity$date) == "Sunday" 
 
 DFAvgStepsPerInt <- aggregate(steps ~ interval + DayType, data = DFActivity , FUN="mean")
 ```
+
+Make a panel plot containing a time series plot (i.e. type = "l") of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all weekday days or weekend days (y-axis). 
 
 
 ```r

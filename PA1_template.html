@@ -249,10 +249,13 @@ The Median total number of steps taken per day is 10765</p>
 
 <p>Total number of missing values in the dataset is 2304</p>
 
-<p>Following is the strategy used to replace missing values. 
-1. Make copy of data set
-2. Calculate mean steps for each  5-minute interval 
-3. Replace NA&#39;s with calculated mean</p>
+<p>Following is the strategy used to replace missing values. </p>
+
+<ol>
+<li>Make copy of data set</li>
+<li>Calculate mean steps for each  5-minute interval </li>
+<li>Replace NA&#39;s with calculated mean</li>
+</ol>
 
 <pre><code class="r">DFActivityImput &lt;- DFActivity
 DFActivityImput$step[(is.na(DFActivityImput$steps))] &lt;- round(ave(DFActivityImput$steps, DFActivityImput$interval, FUN = function(x) mean(x, na.rm=T) )[(is.na(DFActivityImput$steps))])
@@ -274,7 +277,7 @@ hist(DFSumStepsPerDayImput$steps,col=&quot;Red&quot;,freq=TRUE,main=&quot;Total 
 stepsMedian &lt;- median(DFSumStepsPerDayImput$steps)
 </code></pre>
 
-<p>The Mean total number of steps taken per day is 10766
+<p>The Mean total number of steps taken per day is 10766<br/>
 The Median total number of steps taken per day is 10765</p>
 
 <p>Mean and Median total number of steps taken does not differ after applying strategy to replace missing steps count with mean steps of 5-minute interval.</p>
@@ -289,6 +292,8 @@ The Median total number of steps taken per day is 10765</p>
 
 DFAvgStepsPerInt &lt;- aggregate(steps ~ interval + DayType, data = DFActivity , FUN=&quot;mean&quot;)
 </code></pre>
+
+<p>Make a panel plot containing a time series plot (i.e. type = &ldquo;l&rdquo;) of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all weekday days or weekend days (y-axis). </p>
 
 <pre><code class="r">xyplot(steps ~ interval | DayType, data = DFAvgStepsPerInt,type=&quot;l&quot;, layout = c(1,2), ylab=&quot;Number of Steps&quot;, xlab=&quot;Interval&quot; )
 </code></pre>
