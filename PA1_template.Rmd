@@ -91,7 +91,7 @@ Following is the strategy used to replace missing values.
 ```{r Apply strategy to replace missing values}
 
 DFActivityImput <- DFActivity
-DFActivityImput$step[(is.na(DFActivityImput$steps))] <- round(ave(DFActivityImput$steps, DFActivityImput$interval, FUN = function(x) mean(x, na.rm=T) )[(is.na(DFActivityImput$steps))])
+DFActivityImput$steps[(is.na(DFActivityImput$steps))] <- round(ave(DFActivityImput$steps, DFActivityImput$interval, FUN = function(x) mean(x, na.rm=T) )[(is.na(DFActivityImput$steps))])
 
 ```
 
