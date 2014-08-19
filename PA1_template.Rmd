@@ -118,7 +118,7 @@ The Median total number of steps taken per day is `r format(stepsMedian)`
 
 Mean and Median total number of steps taken does not differ after applying strategy to replace missing steps count with mean steps of 5-minute interval.
 
-Estimates of the total daily number of steps has no impact after applying stategy to replace missing steps count with mean steps of 5-minute interval. 
+Estimates of the total daily number of steps has no impact after applying stategy to replace missing steps count with mean steps of 5-minute interval. Just mean total steps frequeny is increased little bit.
 
 
 ## Are there differences in activity patterns between weekdays and weekends?

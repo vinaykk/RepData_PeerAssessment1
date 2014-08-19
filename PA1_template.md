@@ -87,7 +87,7 @@ Following is the strategy used to replace missing values.
 
 ```r
 DFActivityImput <- DFActivity
-DFActivityImput$step[(is.na(DFActivityImput$steps))] <- round(ave(DFActivityImput$steps, DFActivityImput$interval, FUN = function(x) mean(x, na.rm=T) )[(is.na(DFActivityImput$steps))])
+DFActivityImput$steps[(is.na(DFActivityImput$steps))] <- round(ave(DFActivityImput$steps, DFActivityImput$interval, FUN = function(x) mean(x, na.rm=T) )[(is.na(DFActivityImput$steps))])
 ```
 
 Make a histogram of the total number of steps taken each day
@@ -109,11 +109,11 @@ stepsMedian <- median(DFSumStepsPerDayImput$steps)
 ```
 
 The Mean total number of steps taken per day is 10766  
-The Median total number of steps taken per day is 10765
+The Median total number of steps taken per day is 10762
 
 Mean and Median total number of steps taken does not differ after applying strategy to replace missing steps count with mean steps of 5-minute interval.
 
-Estimates of the total daily number of steps has no impact after applying stategy to replace missing steps count with mean steps of 5-minute interval. 
+Estimates of the total daily number of steps has no impact after applying stategy to replace missing steps count with mean steps of 5-minute interval. Just mean total steps frequeny is increased little bit.
 
 
 ## Are there differences in activity patterns between weekdays and weekends?
